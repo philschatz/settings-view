@@ -53,15 +53,15 @@ class SettingsView extends ScrollView
       @currentPanel = $(e.target).closest('li')
       @showPanel(@currentPanel.attr('name'))
 
-    @on 'core:move-up', =>
-      # go to previous item in list
+    atom.commands.add @element, 'core:move-up', =>
+      # Go to previous item in list
       return unless @currentPanel?
       curr = @currentPanel.prev('li')
       curr = curr.prev('li') while curr.length and curr.isHidden()
       curr.find('a')?.click() if curr.length
 
-    @on 'core:move-down', =>
-      # go to next item in list
+    atom.commands.add @element, 'core:move-down', =>
+      # Go to next item in list
       return unless @currentPanel?
       curr = @currentPanel.next('li')
       curr = curr.next('li') while curr.length and curr.isHidden()
