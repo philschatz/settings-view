@@ -72,3 +72,6 @@ class UpdatesPanel extends View
         @updatesContainer.append(packageRow)
 
       packageRow.append(new PackageUpdateView(pack, @packageManager))
+
+  focus: ->
+    @parents('.settings-view').focus()

@@ -13,3 +13,6 @@ class GeneralPanel extends View
 
     @append(new SettingsPanel('core'))
     @append(new SettingsPanel('editor'))
+
+  focus: ->
+    @parents('.settings-view').focus()
