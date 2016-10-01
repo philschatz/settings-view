@@ -36,8 +36,8 @@ class PackageCard extends View
 
       @div class: 'meta', =>
         @div outlet: 'metaUserContainer', class: 'meta-user', =>
-          @a outlet: 'avatarLink', href: "https://atom.io/users/#{owner}", =>
-            @img outlet: 'avatar', class: 'avatar', src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' # A transparent gif so there is no "broken border"
+          @a outlet: 'avatarLink', href: "https://atom.io/users/#{owner}", title: "Owner: #{owner}", =>
+            @img outlet: 'avatar', class: 'avatar', title: "Avatar of #{owner}", src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' # A transparent gif so there is no "broken border"
           @a outlet: 'loginLink', class: 'author', href: "https://atom.io/users/#{owner}", owner
         @div class: 'meta-controls', =>
           @div class: 'btn-toolbar', =>
@@ -52,7 +52,7 @@ class PackageCard extends View
               @button type: 'button', class: 'btn icon icon-trashcan uninstall-button', outlet: 'uninstallButton', 'Uninstall'
               @button type: 'button', class: 'btn icon icon-playback-pause enablement', outlet: 'enablementButton', =>
                 @span class: 'disable-text', 'Disable'
-              @button type: 'button', class: 'btn status-indicator', tabindex: -1, outlet: 'statusIndicator'
+              @button type: 'button', class: 'btn status-indicator', tabindex: -1, outlet: 'statusIndicator', title: 'Enabled'
 
   initialize: (@pack, @packageManager, options={}) ->
     @disposables = new CompositeDisposable()
@@ -243,6 +243,7 @@ class PackageCard extends View
       .removeClass('icon-playback-play')
     @statusIndicator
       .removeClass('is-disabled')
+      .attr('title', 'Enabled')
 
   displayDisabledState: ->
     @addClass('disabled')
@@ -252,6 +253,7 @@ class PackageCard extends View
       .removeClass('icon-playback-pause')
     @statusIndicator
       .addClass('is-disabled')
+      .attr('title', 'Disabled')
 
     if @isDeprecated()
       @enablementButton.prop('disabled', true)
